@@ -56,6 +56,8 @@
             this.退出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Showtimer1 = new System.Windows.Forms.Timer(this.components);
             this.Hidetimer1 = new System.Windows.Forms.Timer(this.components);
+            this.IsNewTime1 = new System.Windows.Forms.Label();
+            this.IsNewTime2 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -85,6 +87,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.IsNewTime2);
+            this.tabPage1.Controls.Add(this.IsNewTime1);
             this.tabPage1.Controls.Add(this.SaveFilesS);
             this.tabPage1.Controls.Add(this.FilePath5);
             this.tabPage1.Controls.Add(this.FilePath4);
@@ -309,6 +313,24 @@
             this.Hidetimer1.Interval = 1;
             this.Hidetimer1.Tick += new System.EventHandler(this.Hidetimer1_Tick);
             // 
+            // IsNewTime1
+            // 
+            this.IsNewTime1.AutoSize = true;
+            this.IsNewTime1.Location = new System.Drawing.Point(9, 180);
+            this.IsNewTime1.Name = "IsNewTime1";
+            this.IsNewTime1.Size = new System.Drawing.Size(95, 12);
+            this.IsNewTime1.TabIndex = 15;
+            this.IsNewTime1.Text = "按时间备份存档:";
+            // 
+            // IsNewTime2
+            // 
+            this.IsNewTime2.AutoSize = true;
+            this.IsNewTime2.Location = new System.Drawing.Point(110, 180);
+            this.IsNewTime2.Name = "IsNewTime2";
+            this.IsNewTime2.Size = new System.Drawing.Size(23, 12);
+            this.IsNewTime2.TabIndex = 16;
+            this.IsNewTime2.Text = "   ";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -320,6 +342,7 @@
             this.Name = "Form1";
             this.ShowInTaskbar = false;
             this.Text = "存档自动备份";
+            this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Shown += new System.EventHandler(this.Form1_Shown);
@@ -362,6 +385,8 @@
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Timer Showtimer1;
         private System.Windows.Forms.Timer Hidetimer1;
+        private System.Windows.Forms.Label IsNewTime1;
+        private System.Windows.Forms.Label IsNewTime2;
     }
 }
 

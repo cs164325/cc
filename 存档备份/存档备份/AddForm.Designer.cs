@@ -37,6 +37,7 @@
             this.YesButton = new System.Windows.Forms.Button();
             this.NoButton = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.IsNewTimeCheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -80,7 +81,7 @@
             // 
             this.YesButton.DialogResult = System.Windows.Forms.DialogResult.Yes;
             this.YesButton.Enabled = false;
-            this.YesButton.Location = new System.Drawing.Point(12, 71);
+            this.YesButton.Location = new System.Drawing.Point(12, 86);
             this.YesButton.Name = "YesButton";
             this.YesButton.Size = new System.Drawing.Size(75, 23);
             this.YesButton.TabIndex = 4;
@@ -91,7 +92,7 @@
             // NoButton
             // 
             this.NoButton.DialogResult = System.Windows.Forms.DialogResult.No;
-            this.NoButton.Location = new System.Drawing.Point(102, 71);
+            this.NoButton.Location = new System.Drawing.Point(102, 86);
             this.NoButton.Name = "NoButton";
             this.NoButton.Size = new System.Drawing.Size(75, 23);
             this.NoButton.TabIndex = 4;
@@ -99,11 +100,22 @@
             this.NoButton.UseVisualStyleBackColor = true;
             this.NoButton.Click += new System.EventHandler(this.NoButton_Click);
             // 
+            // IsNewTimeCheckBox
+            // 
+            this.IsNewTimeCheckBox.AutoSize = true;
+            this.IsNewTimeCheckBox.Location = new System.Drawing.Point(14, 60);
+            this.IsNewTimeCheckBox.Name = "IsNewTimeCheckBox";
+            this.IsNewTimeCheckBox.Size = new System.Drawing.Size(108, 16);
+            this.IsNewTimeCheckBox.TabIndex = 5;
+            this.IsNewTimeCheckBox.Text = "按时间备份存档";
+            this.IsNewTimeCheckBox.UseVisualStyleBackColor = true;
+            // 
             // AddForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(191, 101);
+            this.ClientSize = new System.Drawing.Size(191, 119);
+            this.Controls.Add(this.IsNewTimeCheckBox);
             this.Controls.Add(this.NoButton);
             this.Controls.Add(this.YesButton);
             this.Controls.Add(this.button1);
@@ -130,5 +142,6 @@
         private System.Windows.Forms.Button YesButton;
         private System.Windows.Forms.Button NoButton;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.CheckBox IsNewTimeCheckBox;
     }
 }

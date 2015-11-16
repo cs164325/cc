@@ -72,6 +72,7 @@ namespace 存档备份
                 UPdateLabel2.Text = dt.Rows[0]["updatetime"].ToString();
                 UpdateFilePathLabel(dt.Rows[0]["filepath"].ToString());
                 SaveFilesS.Text = SharedMethod.SelectFiles(Access.SavaFiles + dt.Rows[0]["name"].ToString()).ToString();
+                IsNewTime2.Text = dt.Rows[0]["isnewtime"].ToString();
                 ac.Close();
             }
         }
@@ -115,6 +116,7 @@ namespace 存档备份
             FilePath4.Text = "";
             FilePath5.Text = "";
             SaveFilesS.Text = "";
+            IsNewTime2.Text = "";
         }
 
         private void DelButton_Click(object sender, EventArgs e)
@@ -163,10 +165,12 @@ namespace 存档备份
                 DateTime SaveTime;
                 string filepath;
                 DateTime LastSaveTime;
+                bool isnewtime;
 
                 name = dt.Rows[a]["name"].ToString();
                 SaveTime = Convert.ToDateTime(dt.Rows[a]["UPDATETIME"].ToString());
                 filepath = dt.Rows[a]["filepath"].ToString();
+                isnewtime = dt.Rows[a]["isnewtime"].ToString() == "True" ? true : false;
                 if (Directory.Exists(filepath) == false)
                 {//假如存档位置不存在
                     ac.Command("update game set filepath = '' where name = '" + name + "'");
@@ -177,7 +181,7 @@ namespace 存档备份
                 LastSaveTime = Convert.ToDateTime(SharedMethod.GetLastWriteTime(filepath).ToString());
                 if (SaveTime < LastSaveTime || !SharedMethod.IsFiles(name))
                 {//保存最后一次游戏存档
-                    SharedMethod.BackupSavaFile(filepath,name,false);
+                    SharedMethod.BackupSavaFile(filepath,name,isnewtime);
                     ac.Command("update game set updatetime = '"+LastSaveTime.ToString()+"' where name = '" + name + "'");
                     notifyIcon1.ShowBalloonTip(5000, "提示", "" + name + "存档备份成功", ToolTipIcon.Info);  
                 }

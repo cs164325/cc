@@ -42,15 +42,16 @@ namespace 存档备份
             string name = NameTextBox.Text.Trim();
             string filepath = folderBrowserDialog1.SelectedPath;
             string updatetime = SharedMethod.GetLastWriteTime(folderBrowserDialog1.SelectedPath).ToString();
+            string isnewtime = IsNewTimeCheckBox.Checked.ToString();
             Access ac = new Access();
             ac.Open();
             if (this.Text == "添加")
             {
-                ac.Command("insert into game(name,updatetime,filepath) values('" + name + "','" + updatetime + "','" + filepath + "')");
+                ac.Command("insert into game(name,updatetime,filepath,isnewtime) values('" + name + "','" + updatetime + "','" + filepath + "','"+isnewtime+"')");
             }
             else if(this.Text == "修改")
             {
-                ac.Command("update game set filepath = '"+filepath+"' ,updatetime = '"+updatetime+"' where name = '"+name+"'");
+                ac.Command("update game set filepath = '"+filepath+"' ,updatetime = '"+updatetime+"' ,isnewtime = '"+isnewtime+"' where name = '"+name+"'");
             }
             ac.Close();
         }
@@ -73,10 +74,21 @@ namespace 存档备份
 
         private void AddForm_Load(object sender, EventArgs e)
         {
-            if (this.Text == "修改")
+            if (GameName != "")
             {
-                NameTextBox.Text = GameName;
+                Access ac = new Access();
+                ac.Open();
+                DataTable dt = ac.Select("select * from game where name = '"+GameName+"'");
+                NameTextBox.Text = dt.Rows[0]["name"].ToString();
+                if (dt.Rows[0]["filepath"].ToString() != "")
+                {
+                    folderBrowserDialog1.SelectedPath = dt.Rows[0]["filepath"].ToString();
+                    toolTip1.SetToolTip(button1, folderBrowserDialog1.SelectedPath);
+                    button1.Text = "已选择";
+                }
+                IsNewTimeCheckBox.Checked = dt.Rows[0]["isnewtime"].ToString() == "True"? true:false;
                 NameTextBox.Enabled = false;
+                ac.Close();
             }
         }
 

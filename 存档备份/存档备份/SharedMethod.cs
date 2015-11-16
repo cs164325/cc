@@ -73,7 +73,7 @@ namespace 存档备份
         }
         public static bool IsFiles(string gamename)
         {
-            if (Directory.Exists(Access.SavaFiles + "\\" + gamename))
+            if (Directory.Exists(Access.SavaFiles + gamename))
             {
                 return true;
             }

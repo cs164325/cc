@@ -122,7 +122,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="save_128px_1146288_easyicon.net.ico" />
-    <Content Include="save_128px_28690_easyicon.net.ico" />
     <Content Include="System.Data.SQLite.DLL" />
   </ItemGroup>
   <ItemGroup>

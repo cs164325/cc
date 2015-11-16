@@ -24,10 +24,10 @@ namespace 存档备份
             {
                 if (!File.Exists(DataFile))
                 {
-
+                    
                     conn = new SQLiteConnection(SQLileFile);
                     conn.Open();
-                    cmd = new SQLiteCommand("CREATE TABLE GAME(NAME VARCHAR(50),UPDATETIME VARCHAR(50),FILEPATH VARCHAR(4000))", conn);
+                    cmd = new SQLiteCommand("CREATE TABLE GAME(NAME VARCHAR(50),UPDATETIME VARCHAR(50),FILEPATH VARCHAR(4000),ISNEWTIME VAECHAR(50))", conn);
                     cmd.ExecuteNonQuery();
                     conn.Close();
                     cmd.Clone();
