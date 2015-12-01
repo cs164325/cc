@@ -114,6 +114,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.NoButton;
             this.ClientSize = new System.Drawing.Size(191, 119);
             this.Controls.Add(this.IsNewTimeCheckBox);
             this.Controls.Add(this.NoButton);
@@ -126,6 +127,7 @@
             this.MaximizeBox = false;
             this.Name = "AddForm";
             this.ShowInTaskbar = false;
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.AddForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

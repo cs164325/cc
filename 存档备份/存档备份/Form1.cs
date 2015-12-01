@@ -25,7 +25,14 @@ namespace 存档备份
             updateDGV();
             Save();
         }
-
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Save();
+        }
+        private void Form1_Shown(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
         public void updateDGV()
         {
             ac.Open();
@@ -40,42 +47,8 @@ namespace 存档备份
             ac.Close();
         }
 
-        private void AddButton_Click(object sender, EventArgs e)
-        {
-            AddForm af = new AddForm ();
-            af.StartPosition = FormStartPosition.CenterParent;
-            if (af.ShowDialog() == DialogResult.Yes)
-            {
-                updateDGV();
-            }
-        }
-        private void UpdateButton_Click(object sender, EventArgs e)
-        {
-            if (NameComboBox.Text != "")
-            {
-                string filepath = NameComboBox.Text;
-                AddForm af = new AddForm(NameComboBox.Text);
-                af.StartPosition = FormStartPosition.CenterParent;
-                if (af.ShowDialog() == DialogResult.Yes)
-                {
-                    updateDGV();
-                    NameComboBox.SelectedIndex = NameComboBox.Items.IndexOf(filepath);
-                }
-            }
-        }
-        private void NameComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (NameComboBox.Text != "")
-            {
-                ac.Open();
-                DataTable dt = ac.Select("select * from game where name ='"+NameComboBox.Text+"'");
-                UPdateLabel2.Text = dt.Rows[0]["updatetime"].ToString();
-                UpdateFilePathLabel(dt.Rows[0]["filepath"].ToString());
-                SaveFilesS.Text = SharedMethod.SelectFiles(Access.SavaFiles + dt.Rows[0]["name"].ToString()).ToString();
-                IsNewTime2.Text = dt.Rows[0]["isnewtime"].ToString();
-                ac.Close();
-            }
-        }
+
+        #region 常规
         public void UpdateFilePathLabel(string path)
         {
             int flag = 40;
@@ -117,41 +90,6 @@ namespace 存档备份
             FilePath5.Text = "";
             SaveFilesS.Text = "";
             IsNewTime2.Text = "";
-        }
-
-        private void DelButton_Click(object sender, EventArgs e)
-        {
-            if (NameComboBox.Text != "")
-            {
-                if (MessageBox.Show("当前游戏名称'"+NameComboBox.Text+"',确认删除?", "提示", MessageBoxButtons.OKCancel,MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.OK)
-                {
-                    ac.Open();
-                    int cmdflag = ac.Command("delete from game where name = '" + NameComboBox.Text + "'");
-                    if (cmdflag != -1)
-                    {
-                        MessageBox.Show( "删除成功!","提示");
-                        updateDGV();
-                    }
-                    else
-                    {
-                        MessageBox.Show( "删除失败!","提示");
-                        updateDGV();
-                    }
-                    ac.Close();
-                }
-            }
-        }
-
-        private void 退出ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-
-        private void 手动备份ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-            Save();
         }
         public void Save()
         {
@@ -198,7 +136,82 @@ namespace 存档备份
             ac.Close();
             updateDGV();
         }
-
+        #region 事件
+        private void AddButton_Click(object sender, EventArgs e)
+        {
+            AddForm af = new AddForm ();
+            af.StartPosition = FormStartPosition.CenterParent;
+            if (af.ShowDialog() == DialogResult.Yes)
+            {
+                updateDGV();
+            }
+        }
+        private void UpdateButton_Click(object sender, EventArgs e)
+        {
+            if (NameComboBox.Text != "")
+            {
+                string GameName = NameComboBox.Text;
+                AddForm af = new AddForm(NameComboBox.Text);
+                af.StartPosition = FormStartPosition.CenterParent;
+                if (af.ShowDialog() == DialogResult.Yes)
+                {
+                    updateDGV();
+                    NameComboBox.SelectedIndex = NameComboBox.Items.IndexOf(GameName);
+                }
+            }
+        }
+        private void DelButton_Click(object sender, EventArgs e)
+        {
+            if (NameComboBox.Text != "")
+            {
+                if (MessageBox.Show("当前游戏名称'"+NameComboBox.Text+"',确认删除?", "提示", MessageBoxButtons.OKCancel,MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.OK)
+                {
+                    ac.Open();
+                    int cmdflag = ac.Command("delete from game where name = '" + NameComboBox.Text + "'");
+                    if (cmdflag != -1)
+                    {
+                        MessageBox.Show( "删除成功!","提示");
+                        updateDGV();
+                    }
+                    else
+                    {
+                        MessageBox.Show( "删除失败!","提示");
+                        updateDGV();
+                    }
+                    ac.Close();
+                }
+            }
+        }
+        private void NameComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (NameComboBox.Text != "")
+            {
+                ac.Open();
+                DataTable dt = ac.Select("select * from game where name ='"+NameComboBox.Text+"'");
+                UPdateLabel2.Text = dt.Rows[0]["updatetime"].ToString();
+                UpdateFilePathLabel(dt.Rows[0]["filepath"].ToString());
+                SaveFilesS.Text = SharedMethod.SelectFiles(Access.SavaFiles + dt.Rows[0]["name"].ToString()).ToString();
+                IsNewTime2.Text = dt.Rows[0]["isnewtime"].ToString();
+                ac.Close();
+            }
+        }
+        private void SaveFilesS_DoubleClick(object sender, EventArgs e)
+        {
+            if (NameComboBox.Text != "")
+            {
+                System.Diagnostics.Process.Start("explorer.exe", Access.SavaFiles + NameComboBox.Text);
+            }
+        }
+        private void FilePath2_DoubleClick(object sender, EventArgs e)
+        {
+            if (NameComboBox.Text != "")
+            {
+                System.Diagnostics.Process.Start("explorer.exe", FilePath2.Text + FilePath3.Text + FilePath4.Text + FilePath5.Text);
+            }
+        }
+        #endregion
+        #endregion
+        #region 列表
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox1.CheckState == CheckState.Checked)
@@ -212,16 +225,8 @@ namespace 存档备份
                 updateDGV();
             }
         }
-
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Save();
-        }
-
-        private void Form1_Shown(object sender, EventArgs e)
-        {
-        }
-
+        #endregion
+        #region  小图标方法
         private void Showtimer1_Tick(object sender, EventArgs e)
         {
             if (this.Opacity < 1)
@@ -232,21 +237,6 @@ namespace 存档备份
             {
                 Showtimer1.Enabled = false;
             }
-        }
-        private void 显示ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.Opacity = 0;
-            Rectangle rect = new Rectangle();
-            rect = Screen.GetWorkingArea(this);
-            this.Left = rect.Width / 3;
-            this.Top = rect.Height / 3;
-            this.Show();
-            Showtimer1.Enabled = true;
-        }
-
-        private void 隐藏ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Hidetimer1.Enabled = true;
         }
 
         private void Hidetimer1_Tick(object sender, EventArgs e)
@@ -261,6 +251,29 @@ namespace 存档备份
                 Hidetimer1.Enabled = false;
             }
         }
+        private void 隐藏ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Hidetimer1.Enabled = true;
+        }
+        private void 显示ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Opacity = 0;
+            Rectangle rect = new Rectangle();
+            rect = Screen.GetWorkingArea(this);
+            this.Left = rect.Width / 3;
+            this.Top = rect.Height / 3;
+            this.Show();
+            Showtimer1.Enabled = true;
+        }
+        private void 手动备份ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
 
+            Save();
+        }
+        private void 退出ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+        #endregion
     }
 }

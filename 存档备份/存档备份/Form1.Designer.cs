@@ -33,6 +33,8 @@
             this.AddButton = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.IsNewTime2 = new System.Windows.Forms.Label();
+            this.IsNewTime1 = new System.Windows.Forms.Label();
             this.SaveFilesS = new System.Windows.Forms.Label();
             this.FilePath5 = new System.Windows.Forms.Label();
             this.FilePath4 = new System.Windows.Forms.Label();
@@ -56,8 +58,6 @@
             this.退出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Showtimer1 = new System.Windows.Forms.Timer(this.components);
             this.Hidetimer1 = new System.Windows.Forms.Timer(this.components);
-            this.IsNewTime1 = new System.Windows.Forms.Label();
-            this.IsNewTime2 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -110,6 +110,24 @@
             this.tabPage1.Text = "常规";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // IsNewTime2
+            // 
+            this.IsNewTime2.AutoSize = true;
+            this.IsNewTime2.Location = new System.Drawing.Point(110, 180);
+            this.IsNewTime2.Name = "IsNewTime2";
+            this.IsNewTime2.Size = new System.Drawing.Size(23, 12);
+            this.IsNewTime2.TabIndex = 16;
+            this.IsNewTime2.Text = "   ";
+            // 
+            // IsNewTime1
+            // 
+            this.IsNewTime1.AutoSize = true;
+            this.IsNewTime1.Location = new System.Drawing.Point(9, 180);
+            this.IsNewTime1.Name = "IsNewTime1";
+            this.IsNewTime1.Size = new System.Drawing.Size(95, 12);
+            this.IsNewTime1.TabIndex = 15;
+            this.IsNewTime1.Text = "按时间备份存档:";
+            // 
             // SaveFilesS
             // 
             this.SaveFilesS.AutoSize = true;
@@ -118,33 +136,37 @@
             this.SaveFilesS.Size = new System.Drawing.Size(23, 12);
             this.SaveFilesS.TabIndex = 14;
             this.SaveFilesS.Text = "   ";
+            this.SaveFilesS.DoubleClick += new System.EventHandler(this.SaveFilesS_DoubleClick);
             // 
             // FilePath5
             // 
             this.FilePath5.AutoSize = true;
-            this.FilePath5.Location = new System.Drawing.Point(9, 147);
+            this.FilePath5.Location = new System.Drawing.Point(9, 126);
             this.FilePath5.Name = "FilePath5";
             this.FilePath5.Size = new System.Drawing.Size(23, 12);
             this.FilePath5.TabIndex = 12;
             this.FilePath5.Text = "   ";
+            this.FilePath5.DoubleClick += new System.EventHandler(this.FilePath2_DoubleClick);
             // 
             // FilePath4
             // 
             this.FilePath4.AutoSize = true;
-            this.FilePath4.Location = new System.Drawing.Point(9, 125);
+            this.FilePath4.Location = new System.Drawing.Point(9, 111);
             this.FilePath4.Name = "FilePath4";
             this.FilePath4.Size = new System.Drawing.Size(23, 12);
             this.FilePath4.TabIndex = 12;
             this.FilePath4.Text = "   ";
+            this.FilePath4.DoubleClick += new System.EventHandler(this.FilePath2_DoubleClick);
             // 
             // FilePath3
             // 
             this.FilePath3.AutoSize = true;
-            this.FilePath3.Location = new System.Drawing.Point(9, 103);
+            this.FilePath3.Location = new System.Drawing.Point(9, 96);
             this.FilePath3.Name = "FilePath3";
             this.FilePath3.Size = new System.Drawing.Size(23, 12);
             this.FilePath3.TabIndex = 12;
             this.FilePath3.Text = "   ";
+            this.FilePath3.DoubleClick += new System.EventHandler(this.FilePath2_DoubleClick);
             // 
             // FilePath2
             // 
@@ -154,6 +176,7 @@
             this.FilePath2.Size = new System.Drawing.Size(23, 12);
             this.FilePath2.TabIndex = 11;
             this.FilePath2.Text = "   ";
+            this.FilePath2.DoubleClick += new System.EventHandler(this.FilePath2_DoubleClick);
             // 
             // FilePath1
             // 
@@ -313,24 +336,6 @@
             this.Hidetimer1.Interval = 1;
             this.Hidetimer1.Tick += new System.EventHandler(this.Hidetimer1_Tick);
             // 
-            // IsNewTime1
-            // 
-            this.IsNewTime1.AutoSize = true;
-            this.IsNewTime1.Location = new System.Drawing.Point(9, 180);
-            this.IsNewTime1.Name = "IsNewTime1";
-            this.IsNewTime1.Size = new System.Drawing.Size(95, 12);
-            this.IsNewTime1.TabIndex = 15;
-            this.IsNewTime1.Text = "按时间备份存档:";
-            // 
-            // IsNewTime2
-            // 
-            this.IsNewTime2.AutoSize = true;
-            this.IsNewTime2.Location = new System.Drawing.Point(110, 180);
-            this.IsNewTime2.Name = "IsNewTime2";
-            this.IsNewTime2.Size = new System.Drawing.Size(23, 12);
-            this.IsNewTime2.TabIndex = 16;
-            this.IsNewTime2.Text = "   ";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -339,6 +344,7 @@
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.ShowInTaskbar = false;
             this.Text = "存档自动备份";
