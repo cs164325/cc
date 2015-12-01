@@ -11,7 +11,7 @@ namespace 存档备份
 {
     public partial class AddForm : Form
     {
-        string GameName;
+        string GameName = "";
         public AddForm()
         {
             this.Text = "添加";
