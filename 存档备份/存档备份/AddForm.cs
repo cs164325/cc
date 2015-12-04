@@ -39,21 +39,41 @@ namespace 存档备份
 
         private void YesButton_Click(object sender, EventArgs e)
         {
-            string name = NameTextBox.Text.Trim();
-            string filepath = folderBrowserDialog1.SelectedPath;
-            string updatetime = SharedMethod.GetLastWriteTime(folderBrowserDialog1.SelectedPath).ToString();
-            string isnewtime = IsNewTimeCheckBox.Checked.ToString();
-            Access ac = new Access();
-            ac.Open();
-            if (this.Text == "添加")
+            try
             {
-                ac.Command("insert into game(name,updatetime,filepath,isnewtime) values('" + name + "','" + updatetime + "','" + filepath + "','"+isnewtime+"')");
+                string name = NameTextBox.Text.Trim();
+                string filepath = folderBrowserDialog1.SelectedPath;
+                string updatetime = SharedMethod.GetLastWriteTime(folderBrowserDialog1.SelectedPath).ToString();
+                string isnewtime = IsNewTimeCheckBox.Checked.ToString();
+                Access ac = new Access();
+                ac.Open();
+                if (this.Text == "添加")
+                {
+                    DataTable dt = ac.Select("select * from game where name = '" + name + "'");
+                    if (dt.Rows.Count != 0)
+                    {
+                        MessageBox.Show("提示", "该游戏名称已存在");
+                        return;
+                    }
+                    ac.Command("insert into game(name,updatetime,filepath,isnewtime) values('" + name + "','" + updatetime + "','" + filepath + "','" + isnewtime + "')");
+                    if (SharedMethod.SelectFiles(name) != 0)
+                    {
+
+                    }
+                }
+                else if (this.Text == "修改")
+                {
+                    ac.Command("update game set filepath = '" + filepath + "' ,updatetime = '" + updatetime + "' ,isnewtime = '" + isnewtime + "' where name = '" + name + "'");
+                }
             }
-            else if(this.Text == "修改")
+            catch
             {
-                ac.Command("update game set filepath = '"+filepath+"' ,updatetime = '"+updatetime+"' ,isnewtime = '"+isnewtime+"' where name = '"+name+"'");
+ 
             }
-            ac.Close();
+            finally
+            {
+                ac.Close();
+            }
         }
 
         private void NameTextBox_TextChanged(object sender, EventArgs e)

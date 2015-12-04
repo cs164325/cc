@@ -58,6 +58,7 @@
             this.退出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Showtimer1 = new System.Windows.Forms.Timer(this.components);
             this.Hidetimer1 = new System.Windows.Forms.Timer(this.components);
+            this.RestoreButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -67,9 +68,9 @@
             // 
             // AddButton
             // 
-            this.AddButton.Location = new System.Drawing.Point(6, 209);
+            this.AddButton.Location = new System.Drawing.Point(8, 207);
             this.AddButton.Name = "AddButton";
-            this.AddButton.Size = new System.Drawing.Size(75, 23);
+            this.AddButton.Size = new System.Drawing.Size(60, 23);
             this.AddButton.TabIndex = 0;
             this.AddButton.Text = "添加";
             this.AddButton.UseVisualStyleBackColor = true;
@@ -87,6 +88,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.RestoreButton);
             this.tabPage1.Controls.Add(this.IsNewTime2);
             this.tabPage1.Controls.Add(this.IsNewTime1);
             this.tabPage1.Controls.Add(this.SaveFilesS);
@@ -113,7 +115,7 @@
             // IsNewTime2
             // 
             this.IsNewTime2.AutoSize = true;
-            this.IsNewTime2.Location = new System.Drawing.Point(110, 180);
+            this.IsNewTime2.Location = new System.Drawing.Point(110, 184);
             this.IsNewTime2.Name = "IsNewTime2";
             this.IsNewTime2.Size = new System.Drawing.Size(23, 12);
             this.IsNewTime2.TabIndex = 16;
@@ -122,7 +124,7 @@
             // IsNewTime1
             // 
             this.IsNewTime1.AutoSize = true;
-            this.IsNewTime1.Location = new System.Drawing.Point(9, 180);
+            this.IsNewTime1.Location = new System.Drawing.Point(9, 184);
             this.IsNewTime1.Name = "IsNewTime1";
             this.IsNewTime1.Size = new System.Drawing.Size(95, 12);
             this.IsNewTime1.TabIndex = 15;
@@ -198,9 +200,9 @@
             // 
             // DelButton
             // 
-            this.DelButton.Location = new System.Drawing.Point(198, 210);
+            this.DelButton.Location = new System.Drawing.Point(209, 207);
             this.DelButton.Name = "DelButton";
-            this.DelButton.Size = new System.Drawing.Size(75, 23);
+            this.DelButton.Size = new System.Drawing.Size(60, 23);
             this.DelButton.TabIndex = 8;
             this.DelButton.Text = "删除";
             this.DelButton.UseVisualStyleBackColor = true;
@@ -208,9 +210,9 @@
             // 
             // UpdateButton
             // 
-            this.UpdateButton.Location = new System.Drawing.Point(102, 210);
+            this.UpdateButton.Location = new System.Drawing.Point(75, 207);
             this.UpdateButton.Name = "UpdateButton";
-            this.UpdateButton.Size = new System.Drawing.Size(75, 23);
+            this.UpdateButton.Size = new System.Drawing.Size(60, 23);
             this.UpdateButton.TabIndex = 7;
             this.UpdateButton.Text = "修改";
             this.UpdateButton.UseVisualStyleBackColor = true;
@@ -336,6 +338,16 @@
             this.Hidetimer1.Interval = 1;
             this.Hidetimer1.Tick += new System.EventHandler(this.Hidetimer1_Tick);
             // 
+            // RestoreButton
+            // 
+            this.RestoreButton.Location = new System.Drawing.Point(142, 207);
+            this.RestoreButton.Name = "RestoreButton";
+            this.RestoreButton.Size = new System.Drawing.Size(60, 23);
+            this.RestoreButton.TabIndex = 17;
+            this.RestoreButton.Text = "还原";
+            this.RestoreButton.UseVisualStyleBackColor = true;
+            this.RestoreButton.Click += new System.EventHandler(this.RestoreButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -393,6 +405,7 @@
         private System.Windows.Forms.Timer Hidetimer1;
         private System.Windows.Forms.Label IsNewTime1;
         private System.Windows.Forms.Label IsNewTime2;
+        private System.Windows.Forms.Button RestoreButton;
     }
 }
 

@@ -80,13 +80,14 @@ namespace 存档备份
             return false;
         }
 
-        public static int SelectFiles(string path)
+        public static int SelectFiles(string gamename)
         {
-            if(!Directory.Exists(path))
+            string FilePatg = Access.SavaFiles + gamename;
+            if(!Directory.Exists(FilePatg))
             {
                 return 0;
             }
-            DirectoryInfo di = new DirectoryInfo(path);
+            DirectoryInfo di = new DirectoryInfo(FilePatg);
             return di.GetDirectories().Length;
         }
     }

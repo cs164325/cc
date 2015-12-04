@@ -182,6 +182,23 @@ namespace 存档备份
                 }
             }
         }
+        private void RestoreButton_Click(object sender, EventArgs e)
+        {
+            if (NameComboBox.Text != "")
+            {
+                if (SaveFilesS.Text != "" || SaveFilesS.Text != "0")
+                {
+                    string GameName = NameComboBox.Text;
+                    RestoreForm rf = new RestoreForm(NameComboBox.Text);
+                    rf.StartPosition = FormStartPosition.CenterParent;
+                    if (rf.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
+                    {
+                        updateDGV();
+                        NameComboBox.Text = NameComboBox.Items.IndexOf(GameName);
+                    }
+                }
+            }
+        }
         private void NameComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (NameComboBox.Text != "")
@@ -190,7 +207,7 @@ namespace 存档备份
                 DataTable dt = ac.Select("select * from game where name ='"+NameComboBox.Text+"'");
                 UPdateLabel2.Text = dt.Rows[0]["updatetime"].ToString();
                 UpdateFilePathLabel(dt.Rows[0]["filepath"].ToString());
-                SaveFilesS.Text = SharedMethod.SelectFiles(Access.SavaFiles + dt.Rows[0]["name"].ToString()).ToString();
+                SaveFilesS.Text = SharedMethod.SelectFiles(dt.Rows[0]["name"].ToString()).ToString();
                 IsNewTime2.Text = dt.Rows[0]["isnewtime"].ToString();
                 ac.Close();
             }
@@ -227,11 +244,12 @@ namespace 存档备份
         }
         #endregion
         #region  小图标方法
+        double TimerSpeed = 0.05;
         private void Showtimer1_Tick(object sender, EventArgs e)
         {
             if (this.Opacity < 1)
             {
-                this.Opacity = this.Opacity + 0.01;
+                this.Opacity = this.Opacity + TimerSpeed;
             }
             else
             {
@@ -243,7 +261,7 @@ namespace 存档备份
         {
             if (this.Opacity >0)
             {
-                this.Opacity = this.Opacity - 0.01;
+                this.Opacity = this.Opacity - TimerSpeed;
             }
             else
             {
@@ -275,5 +293,7 @@ namespace 存档备份
             Application.Exit();
         }
         #endregion
+
+
     }
 }
