@@ -103,15 +103,14 @@ namespace 存档备份
                 DateTime SaveTime;
                 string filepath;
                 DateTime LastSaveTime;
-                bool isnewtime;
+                int isnewtime;
 
                 name = dt.Rows[a]["name"].ToString();
                 SaveTime = Convert.ToDateTime(dt.Rows[a]["UPDATETIME"].ToString());
                 filepath = dt.Rows[a]["filepath"].ToString();
-                isnewtime = dt.Rows[a]["isnewtime"].ToString() == "True" ? true : false;
+                isnewtime = dt.Rows[a]["isnewtime"].ToString() == "True" ? 1 : 2;
                 if (Directory.Exists(filepath) == false)
                 {//假如存档位置不存在
-                    ac.Command("update game set filepath = '' where name = '" + name + "'");
                     shixiaogamename = shixiaogamename+name;
                     continue;
                 }
@@ -189,12 +188,12 @@ namespace 存档备份
                 if (SaveFilesS.Text != "" || SaveFilesS.Text != "0")
                 {
                     string GameName = NameComboBox.Text;
-                    RestoreForm rf = new RestoreForm(NameComboBox.Text);
+                    RestoreForm rf = new RestoreForm(NameComboBox.Text, FilePath2.Text + FilePath3.Text + FilePath4.Text + FilePath5.Text);
                     rf.StartPosition = FormStartPosition.CenterParent;
                     if (rf.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
                     {
                         updateDGV();
-                        NameComboBox.Text = NameComboBox.Items.IndexOf(GameName);
+                        NameComboBox.SelectedIndex = NameComboBox.Items.IndexOf(GameName);
                     }
                 }
             }
@@ -234,7 +233,19 @@ namespace 存档备份
             if (checkBox1.CheckState == CheckState.Checked)
             {
                 ac.Open();
-                dataGridView1.DataSource = ac.Select("select name as 游戏名称 from game where filepath = ''");
+                DataTable dt = ac.Select("select name as 游戏名称,filepath as 游戏路径 from game ");
+                int flag = dt.Rows.Count;
+                for (int a = 0; a < flag; a++)
+                {
+                    if(SharedMethod.IsSaveFile(dt.Rows[a]["游戏路径"].ToString()))
+                    {
+                        dt.Rows[a].Delete();
+                        a = -1;
+                        flag--;
+                        continue;
+                    }
+                }
+                dataGridView1.DataSource = dt;
                 ac.Close();
             }
             else

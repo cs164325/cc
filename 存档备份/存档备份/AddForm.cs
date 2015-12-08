@@ -65,14 +65,11 @@ namespace 存档备份
                 {
                     ac.Command("update game set filepath = '" + filepath + "' ,updatetime = '" + updatetime + "' ,isnewtime = '" + isnewtime + "' where name = '" + name + "'");
                 }
+                ac.Close();
             }
             catch
             {
  
-            }
-            finally
-            {
-                ac.Close();
             }
         }
 

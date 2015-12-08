@@ -33,6 +33,7 @@
             this.AddButton = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.RestoreButton = new System.Windows.Forms.Button();
             this.IsNewTime2 = new System.Windows.Forms.Label();
             this.IsNewTime1 = new System.Windows.Forms.Label();
             this.SaveFilesS = new System.Windows.Forms.Label();
@@ -58,7 +59,6 @@
             this.退出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Showtimer1 = new System.Windows.Forms.Timer(this.components);
             this.Hidetimer1 = new System.Windows.Forms.Timer(this.components);
-            this.RestoreButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -112,6 +112,16 @@
             this.tabPage1.Text = "常规";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // RestoreButton
+            // 
+            this.RestoreButton.Location = new System.Drawing.Point(142, 207);
+            this.RestoreButton.Name = "RestoreButton";
+            this.RestoreButton.Size = new System.Drawing.Size(60, 23);
+            this.RestoreButton.TabIndex = 17;
+            this.RestoreButton.Text = "还原";
+            this.RestoreButton.UseVisualStyleBackColor = true;
+            this.RestoreButton.Click += new System.EventHandler(this.RestoreButton_Click);
+            // 
             // IsNewTime2
             // 
             this.IsNewTime2.AutoSize = true;
@@ -138,7 +148,7 @@
             this.SaveFilesS.Size = new System.Drawing.Size(23, 12);
             this.SaveFilesS.TabIndex = 14;
             this.SaveFilesS.Text = "   ";
-            this.SaveFilesS.DoubleClick += new System.EventHandler(this.SaveFilesS_DoubleClick);
+            this.SaveFilesS.Click += new System.EventHandler(this.SaveFilesS_DoubleClick);
             // 
             // FilePath5
             // 
@@ -148,7 +158,7 @@
             this.FilePath5.Size = new System.Drawing.Size(23, 12);
             this.FilePath5.TabIndex = 12;
             this.FilePath5.Text = "   ";
-            this.FilePath5.DoubleClick += new System.EventHandler(this.FilePath2_DoubleClick);
+            this.FilePath5.Click += new System.EventHandler(this.FilePath2_DoubleClick);
             // 
             // FilePath4
             // 
@@ -158,7 +168,7 @@
             this.FilePath4.Size = new System.Drawing.Size(23, 12);
             this.FilePath4.TabIndex = 12;
             this.FilePath4.Text = "   ";
-            this.FilePath4.DoubleClick += new System.EventHandler(this.FilePath2_DoubleClick);
+            this.FilePath4.Click += new System.EventHandler(this.FilePath2_DoubleClick);
             // 
             // FilePath3
             // 
@@ -168,7 +178,7 @@
             this.FilePath3.Size = new System.Drawing.Size(23, 12);
             this.FilePath3.TabIndex = 12;
             this.FilePath3.Text = "   ";
-            this.FilePath3.DoubleClick += new System.EventHandler(this.FilePath2_DoubleClick);
+            this.FilePath3.Click += new System.EventHandler(this.FilePath2_DoubleClick);
             // 
             // FilePath2
             // 
@@ -178,7 +188,7 @@
             this.FilePath2.Size = new System.Drawing.Size(23, 12);
             this.FilePath2.TabIndex = 11;
             this.FilePath2.Text = "   ";
-            this.FilePath2.DoubleClick += new System.EventHandler(this.FilePath2_DoubleClick);
+            this.FilePath2.Click += new System.EventHandler(this.FilePath2_DoubleClick);
             // 
             // FilePath1
             // 
@@ -337,16 +347,6 @@
             // 
             this.Hidetimer1.Interval = 1;
             this.Hidetimer1.Tick += new System.EventHandler(this.Hidetimer1_Tick);
-            // 
-            // RestoreButton
-            // 
-            this.RestoreButton.Location = new System.Drawing.Point(142, 207);
-            this.RestoreButton.Name = "RestoreButton";
-            this.RestoreButton.Size = new System.Drawing.Size(60, 23);
-            this.RestoreButton.TabIndex = 17;
-            this.RestoreButton.Text = "还原";
-            this.RestoreButton.UseVisualStyleBackColor = true;
-            this.RestoreButton.Click += new System.EventHandler(this.RestoreButton_Click);
             // 
             // Form1
             // 
