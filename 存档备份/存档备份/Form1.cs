@@ -38,6 +38,7 @@ namespace 存档备份
             ac.Open();
             NameComboBox.Items.Clear();
             WipeLabel();
+            checkBox1.Checked = false;
             dataGridView1.DataSource = ac.Select("select name as 游戏名称,updatetime as 上次游戏时间  from game");
             DataTable dt = ac.Select("select * from game");
             for (int a = 0; a < dt.Rows.Count; a++)
@@ -235,23 +236,33 @@ namespace 存档备份
                 ac.Open();
                 DataTable dt = ac.Select("select name as 游戏名称,filepath as 游戏路径 from game ");
                 int flag = dt.Rows.Count;
+                List<int> li = new List<int>();
                 for (int a = 0; a < flag; a++)
                 {
                     if(SharedMethod.IsSaveFile(dt.Rows[a]["游戏路径"].ToString()))
                     {
-                        dt.Rows[a].Delete();
-                        a = -1;
-                        flag--;
-                        continue;
+                        li.Add(a);
                     }
+                }
+                for (int a = 0; a < li.Count; a++)
+                {
+                    dt.Rows[li[a]].Delete();
                 }
                 dataGridView1.DataSource = dt;
                 ac.Close();
             }
             else
             {
-                updateDGV();
+                ac.Open();
+                dataGridView1.DataSource = ac.Select("select name as 游戏名称,updatetime as 上次游戏时间  from game");
+                ac.Close();
             }
+        }
+        private void dataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            string name =  dataGridView1.CurrentRow.Cells[0].Value.ToString();
+            NameComboBox.SelectedIndex = NameComboBox.Items.IndexOf(name);
+            tabControl1.SelectedIndex = 0;
         }
         #endregion
         #region  小图标方法
@@ -304,6 +315,8 @@ namespace 存档备份
             Application.Exit();
         }
         #endregion
+
+
 
 
     }
