@@ -12,6 +12,7 @@ namespace 存档备份
 {
     public partial class Form1 : Form
     {
+        bool Close = true;
         Access ac;
         public Form1()
         {
@@ -231,8 +232,16 @@ namespace 存档备份
         }
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            e.Cancel = true;
-            隐藏ToolStripMenuItem_Click(this,new EventArgs());
+            
+            e.Cancel = Close;
+            if (Close)
+            {
+                隐藏ToolStripMenuItem_Click(this, new EventArgs());
+            }
+            else
+            {
+                Save();
+            }
         }
         #endregion
         #endregion
@@ -320,6 +329,7 @@ namespace 存档备份
         }
         private void 退出ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Close = false;
             Application.Exit();
         }
         #endregion
