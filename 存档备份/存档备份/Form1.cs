@@ -25,10 +25,7 @@ namespace 存档备份
             updateDGV();
             Save();
         }
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Save();
-        }
+
         private void Form1_Shown(object sender, EventArgs e)
         {
             this.Hide();
@@ -38,7 +35,7 @@ namespace 存档备份
             ac.Open();
             NameComboBox.Items.Clear();
             WipeLabel();
-            if (checkBox1.Checked == CheckState.Checked)
+            if (checkBox1.CheckState == CheckState.Checked)
             {
                 checkBox1.Checked = false;
             }
@@ -231,6 +228,11 @@ namespace 存档备份
             {
                 System.Diagnostics.Process.Start("explorer.exe", FilePath2.Text + FilePath3.Text + FilePath4.Text + FilePath5.Text);
             }
+        }
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+            隐藏ToolStripMenuItem_Click(this,new EventArgs());
         }
         #endregion
         #endregion
