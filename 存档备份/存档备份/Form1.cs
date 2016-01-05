@@ -38,8 +38,14 @@ namespace 存档备份
             ac.Open();
             NameComboBox.Items.Clear();
             WipeLabel();
-            checkBox1.Checked = false;
-            dataGridView1.DataSource = ac.Select("select name as 游戏名称,updatetime as 上次游戏时间  from game");
+            if (checkBox1.Checked == CheckState.Checked)
+            {
+                checkBox1.Checked = false;
+            }
+            else
+            {
+                dataGridView1.DataSource = ac.Select("select name as 游戏名称,updatetime as 上次游戏时间  from game");
+            }
             DataTable dt = ac.Select("select * from game");
             for (int a = 0; a < dt.Rows.Count; a++)
             {
