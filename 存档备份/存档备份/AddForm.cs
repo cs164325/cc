@@ -58,7 +58,14 @@ namespace 存档备份
                     ac.Command("insert into game(name,updatetime,filepath,isnewtime) values('" + name + "','" + updatetime + "','" + filepath + "','" + isnewtime + "')");
                     if (SharedMethod.SelectFiles(name) != 0)
                     {
-
+                        if (MessageBox.Show("当前游戏有曾备份的存档文件,是否还原?", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
+                        {
+                            
+                            RestoreForm rf = new RestoreForm(name,filepath);
+                            rf.StartPosition = FormStartPosition.CenterParent;
+                            this.Opacity = 0;
+                            rf.ShowDialog();
+                        }
                     }
                 }
                 else if (this.Text == "修改")

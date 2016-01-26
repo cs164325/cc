@@ -39,7 +39,14 @@ namespace 存档备份
         {
             if (MessageBox.Show("当前名称'" + comboBox1.Text + "',确认还原存档?", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.OK)
             {
-                SharedMethod.RestoreSave(GameNameStr, comboBox1.Text, SavePathStr);
+                if (SharedMethod.RestoreSave(GameNameStr, comboBox1.Text, SavePathStr))
+                {
+                    MessageBox.Show("还原成功!", "提示");
+                }
+                else
+                {
+                    MessageBox.Show("还原失败!", "错误提示");
+                }
             }
         }
 

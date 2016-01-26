@@ -12,7 +12,7 @@ namespace 存档备份
 {
     public partial class Form1 : Form
     {
-        bool Close = true;
+        bool IsNoClose = true;
         Access ac;
         public Form1()
         {
@@ -36,6 +36,11 @@ namespace 存档备份
             ac.Open();
             NameComboBox.Items.Clear();
             WipeLabel();
+            DataTable dt = ac.Select("select * from game");
+            for (int a = 0; a < dt.Rows.Count; a++)
+            {
+                NameComboBox.Items.Add(dt.Rows[a]["name"].ToString());
+            }
             if (checkBox1.CheckState == CheckState.Checked)
             {
                 checkBox1.Checked = false;
@@ -43,11 +48,6 @@ namespace 存档备份
             else
             {
                 dataGridView1.DataSource = ac.Select("select name as 游戏名称,updatetime as 上次游戏时间  from game");
-            }
-            DataTable dt = ac.Select("select * from game");
-            for (int a = 0; a < dt.Rows.Count; a++)
-            {
-                NameComboBox.Items.Add(dt.Rows[a]["name"].ToString());
             }
             ac.Close();
         }
@@ -233,8 +233,8 @@ namespace 存档备份
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             
-            e.Cancel = Close;
-            if (Close)
+            e.Cancel = IsNoClose;
+            if (IsNoClose)
             {
                 隐藏ToolStripMenuItem_Click(this, new EventArgs());
             }
@@ -329,7 +329,7 @@ namespace 存档备份
         }
         private void 退出ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Close = false;
+            IsNoClose = false;
             Application.Exit();
         }
         #endregion
